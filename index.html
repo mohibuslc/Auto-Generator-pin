@@ -16,14 +16,14 @@
             <div class="col-md-6">
                 <div class="pin-generator half-width">
                     <input id="pin" class="form-control" type="text">
-                    <button onclick ="generatePin()" class="generate-btn">Generate Pin</button>
+                    <button onclick="generatePin()" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="type" class="form-control" type="text">
                     <div class="numbers">
-                        <div class="calc-body">
+                        <div id="digit-container" class="calc-body">
                             <div class="calc-button-row">
                                 <div class="button">7</div>
                                 <div class="button">8</div>
@@ -41,12 +41,12 @@
                             </div>
                             <div class="calc-button-row">
                                 <div class="button">
-                                    << /div>
-                                        <div class="button">0</div>
-                                        <div class="button">C</div>
+                                    <div class="button">0</div>
+                                    <!--<div class="button">C</div>-->
+                                    <!--<div class="button">D</div>-->
                                 </div>
                                 <div>
-                                    <button type="submit" class="submit-btn">Submit</button>
+                                    <button onclick="matchdigit()" type="submit" class="submit-btn">Submit</button>
                                     <p class="action-left">3 try left</p>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                     </div>
                 </div>
                 <div class="notify-section">
-                    <p class="notify">❌ Pin Didn't Match, Please try again</p>
-                    <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+                    <p id="verifiyPin" class="notify">❌ Pin Didn't Match, Please try again</p>
+                    <p id ="verifimatchpin" class="notify">✅ Pin Matched... Secret door is opening for you</p>
                 </div>
             </div>
             <script>
@@ -85,7 +85,48 @@
                     pinInput.value = getPin();
 
                 }
+                // hansle Calculator Button event
 
+
+
+                const containerButton = document.getElementById('digit-container');
+
+                containerButton.addEventListener('click', function (event) {
+
+                    const digit = event.target.innerText; // innerText : use for looking what text have inside: 
+                    if (isNaN(digit)) {
+
+                        // handle back space
+                        // handle clear
+                    }
+
+                    else {
+
+                        //console.log(digit);
+                        const typedinput = document.getElementById('type');
+                        typedinput.value = typedinput.value + digit;
+
+
+
+                    }
+
+                })
+
+                function matchdigit() {
+                    const pin = document.getElementById('pin').value;
+                    const typedpin = document.getElementById('type').value;
+                    if (pin === typedpin) {
+
+                        const verifiy = document.getElementById('verifimatchpin');
+                        verifiy.style.display = 'block';
+                    }
+                    else{
+
+                        const verifiy = document.getElementById('verifiyPin');
+                        verifiy.style.display = 'block';
+                    }
+
+                }
 
             </script>
 </body>
